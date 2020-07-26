@@ -117,7 +117,7 @@ function glmain() {
 				}
 				break;
 			case 1:
-				if (count % 20 == 0) {
+				if (count > 30 && count % 20 == 0) {
 					const bulletsNum = 24;
 					for (let i = 0; i < bulletsNum; i++) {
 						let th = (i + count / 15 * 0.25) / bulletsNum * Math.PI * 2.0;
@@ -137,7 +137,7 @@ function glmain() {
 				}
 				break;
 			case 2:
-				if (count % 20 == 0) {
+				if (count > 30 && count % 20 == 0) {
 					const bulletsNum = 24;
 					for (let i = 0; i < bulletsNum; i++) {
 						let th = (i / bulletsNum) * Math.PI * 2.0;
