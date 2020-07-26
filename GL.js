@@ -98,67 +98,80 @@ function glmain() {
 			bulletsMode = (bulletsMode + 1) % 3;
 		}
 		
-		if (bullets.length < 1000 && Math.random() > 0.7) {
-			let th = 0.0;
+		if (bullets.length < 1000) {
 			switch (bulletsMode) {
 			case 0:
-				bullets.push({
-					x: 2.0 * Math.random() - 1.0,
-					y: 1.0,
-					t: 0,
-					col: [ 0.8, 1.0, 0.8 ],
-					f_v: (n) => {
-						return {
-							x: 0.0,
-							y: -0.01
-						};
-					},
-				});
+				if (Math.random() > 0.7) {
+					bullets.push({
+						x: 2.0 * Math.random() - 1.0,
+						y: 1.0,
+						t: 0,
+						col: [ 0.8, 1.0, 0.8 ],
+						f_v: (n) => {
+							return {
+								x: 0.0,
+								y: -0.01
+							};
+						},
+					});
+				}
 				break;
 			case 1:
-				th = Math.random() * Math.PI * 2.0;
-				bullets.push({
-					x: 0.0,
-					y: 0.2,
-					t: 0,
-					col: [ 0.5, 0.5 + 0.5 * Math.random(), 0.5 + 0.5 * Math.random() ],
-					f_v: (n) => {
-						return {
-							x: 0.01 * Math.cos(th),
-							y: 0.01 * Math.sin(th),
-						};
-					},
-				});
+				if (count % 20 == 0) {
+					const bulletsNum = 24;
+					for (let i = 0; i < bulletsNum; i++) {
+						let th = (i + count / 15 * 0.25) / bulletsNum * Math.PI * 2.0;
+						bullets.push({
+							x: 0.0,
+							y: 0.2,
+							t: 0,
+							col: [ 0.5, 0.5 + 0.5 * Math.random(), 0.5 + 0.5 * Math.random() ],
+							f_v: (n) => {
+								return {
+									x: 0.01 * Math.cos(th),
+									y: 0.01 * Math.sin(th),
+								};
+							},
+						});
+					}
+				}
 				break;
 			case 2:
-				th = Math.random() * Math.PI * 2.0;
-				bullets.push({
-					x: 0.0,
-					y: 0.0,
-					t: 0,
-					col: [ 0.8 + 0.2 * Math.random(), 0.5 + 0.5 * Math.random(), 0.5 + 0.5 * Math.random() ],
-					f_v: (n) => {
-						return {
-							x: 0.2 * (Math.exp(n * 0.001) - 1.0) * Math.cos(th + n * 0.005 * Math.PI),
-							y: 0.2 * (Math.exp(n * 0.001) - 1.0) * Math.sin(th + n * 0.005 * Math.PI),
-						};
-					},
-				});
+				if (count % 20 == 0) {
+					const bulletsNum = 24;
+					for (let i = 0; i < bulletsNum; i++) {
+						let th = (i / bulletsNum) * Math.PI * 2.0;
+						bullets.push({
+							x: 0.0,
+							y: 0.0,
+							t: 0,
+							col: [ 0.8 + 0.2 * Math.random(), 0.5 + 0.5 * Math.random(), 0.5 + 0.5 * Math.random() ],
+							f_v: (n) => {
+								return {
+									x: 0.2 * (Math.exp(n * 0.001) - 1.0) * Math.cos(th + n * 0.005 * Math.PI),
+									y: 0.2 * (Math.exp(n * 0.001) - 1.0) * Math.sin(th + n * 0.005 * Math.PI),
+								};
+							},
+						});
+					}
+				}
 				break;
 			case 3:
-				th = Math.random() * Math.PI * 2.0;
-				bullets.push({
-					x: 0.0,
-					y: 0.0,
-					t: 0,
-					texture: 3,
-					f_v: (n) => {
-						return {
-							x: 0.01 * Math.cos(th + n / 300 * Math.PI),
-							y: 0.01 * Math.sin(th + n / 300 * Math.PI),
-						};
-					},
-				});
+				if (Math.random() > 0.7) {
+					let th = Math.random() * Math.PI * 2.0;
+					bullets.push({
+						x: 0.0,
+						y: 0.0,
+						t: 0,
+						texture: 3,
+						f_v: (n) => {
+							return {
+								x: 0.01 * Math.cos(th + n / 300 * Math.PI),
+								y: 0.01 * Math.sin(th + n / 300 * Math.PI),
+							};
+						},
+					});
+				}
 			}
 		}
 		for (let i = 0; i < bullets.length; i++) {
